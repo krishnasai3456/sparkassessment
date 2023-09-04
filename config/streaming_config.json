@@ -1,0 +1,15 @@
+{
+    "kafka": {
+      "bootstrap.servers": "localhost:9091",
+      "topic": "some_kafka_topic"
+    },
+    "hdfs": {
+      "parquet_output_path": "../data/stream/parquet_output/",
+      "raw_input_path": "../data/stream/raw_input/"
+    },
+    "trigger_interval": "10 seconds",
+    "schema":{
+      "filepath": "data/schema.json"
+    }
+  }
+  

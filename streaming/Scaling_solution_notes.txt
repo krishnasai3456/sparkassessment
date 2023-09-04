@@ -1,0 +1,37 @@
+1) How do you ensure that only delta/new records are pulled from the RAW Zone to the Processed Zone?
+
+For this we can perform CDC logic/ checkpointing logic:
+
+Change Data Capture (CDC): Implement a CDC mechanism to track changes in the source data. This can involve adding timestamps or versioning to records.  During processing select records that have been modified or added since the last processing run.
+
+checkpointing / Maintain State: Maintain a state that keeps track of the last processed record or some checkpoint. This state can help identify new records or changes since the last run.
+
+2) What strategies will you employ to manage older data in the RAW Zone to prevent it from becoming too large?
+
+Data Archiving: Periodically archive older data to a separate storage system or a cold storage solution.This would also save cost
+
+Data Retention Policies: Apply data retention policies that define how long data should be kept in the RAW Zone. Confiure in such a way to  delete or archive data that exceeds these policies.
+
+3) Will you run these programs on a cluster or as a client?
+
+Cluster: Running Spark programs on a cluster is typically the preferred approach for production workloads. It allows for distributed processing, scalability, and fault tolerance. Cluster deployment is suitable for Spark Streaming and batch processing.
+
+Client: Running programs on a client machine might be suitable for development, testing, or small-scale scenarios. It can't be used for large-scale and real time applicaiton as it doesn't perfom distributed processing 
+
+4)How will you determine the appropriate number of cores and executors for:
+
+Spark Streaming Job: The number of cores and executors for a Spark Streaming job depends on factors like the expected data volume,  complezity and available cluster resources. We can enable dynamic allocation fi needed. 
+
+Hourly Spark Batch Job: For batch jobs, you can allocate resources based on the size of the dataset and the complexity of transformations. It's essential to perform resource testing to find the optimal configuration.
+
+5) How will you avoid encountering the small file issue in both the RAW and Processed Zones?
+
+Coalesce or Repartition: Use the coalesce or repartition operations in Spark to control the number of output files. You can specify the desired number of output files to avoid creating excessive small files.
+
+Compaction and Merging: Implement a periodic job to compact and merge smaller Parquet files into larger ones in both the RAW and Processed Zones. This can be scheduled to run at intervals to prevent the proliferation of small files.
+
+
+
+
+
+

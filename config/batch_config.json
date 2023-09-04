@@ -1,0 +1,10 @@
+{
+    "hdfs": {
+      "raw_input_path": "../data/batch/raw_input",
+      "processed_output_path": "../data/batch/processed_output"
+    },
+    "schema":{
+      "filepath": "data/schema.json"
+    }
+  }
+  
