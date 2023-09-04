@@ -18,7 +18,7 @@ raw_data = spark.read.parquet(batch_config["hdfs"]["raw_input_path"])
 
 # Read config
 raw_input_path = batch_config["hdfs"]["raw_input_path"]
-processed_output_path = batch_config["hdfs"]["raw_input_path"]
+processed_output_path = batch_config["hdfs"]["processed_output_path"]
 schema = batch_config["schema"]["filepath"]
 
 #parse and flatten XML to DF
@@ -34,5 +34,5 @@ processed_data = temp_df \
 # write back to processed output path
 processed_data.write \
     .partitionBy("date_partition") \
-    .parquet(batch_config["hdfs"]["processed_output_path"], mode="overwrite")
+    .parquet(processed_output_path, mode="overwrite")
 
